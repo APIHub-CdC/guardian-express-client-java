@@ -195,14 +195,25 @@ public class GuardIAnScoreApiTest {
     @Test
     public void creditreportTest() throws Exception {
         CreditReport report = new CreditReport();
-        RequestBody body = new RequestBody();
+        RequestDatosGenerales requestDatosGenerales = new RequestDatosGenerales();
+        requestDatosGenerales.setFolioOtorgante(100000001);
+        RequestDatosGeneralesPersona requestDatosGeneralesPersona = new RequestDatosGeneralesPersona();
+        requestDatosGeneralesPersona.setPrimerNombre("your name");
+        requestDatosGeneralesPersona.setApellidoPaterno("");
+        requestDatosGeneralesPersona.setApellidoMaterno("");
+        requestDatosGeneralesPersona.setFechaNacimiento("");
+        requestDatosGeneralesPersona.setRFC("");
+        RequestDatosGeneralesPersonaDomicilio requestDatosGeneralesPersonaDomicilio = new RequestDatosGeneralesPersonaDomicilio();
+        requestDatosGeneralesPersonaDomicilio.setDireccion("");
+        requestDatosGeneralesPersonaDomicilio.setColonia("");
+        requestDatosGeneralesPersonaDomicilio.setDelegacionMunicipio("");
+        requestDatosGeneralesPersonaDomicilio.setCiudad("");
+        requestDatosGeneralesPersonaDomicilio.setEstado(CatalogoEstados.CDMX);
+        requestDatosGeneralesPersonaDomicilio.setCp("");
+        requestDatosGeneralesPersona.setDomicilio(requestDatosGeneralesPersonaDomicilio);
+        requestDatosGenerales.setPersona(requestDatosGeneralesPersona);
 
-        report.setIdFolioConsultaReporte("folio_consulta");
-        report.setFolioOtorgante("folio_otorgante");
-
-        body.setCreditReport(report);
-
-        ResponseBody response = api.creditreport(xApiKey, username, password, body);
+        ResponseGuardianDG response = api.creditreport(xApiKey, username, password, requestDatosGenerales);
         System.out.println(response.toString());
         logger.info("Report: " + response.toString());
 
